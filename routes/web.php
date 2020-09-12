@@ -13,6 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Route::get('/',function (){
+//   return view('frontend.main');
+// })->name('main');
+
+Route::get('greeting', function () {
+  $info = ['name'=>'Thet Paing Htut'];
+  return view('welcome',['array' => $info]);
 });
+
+

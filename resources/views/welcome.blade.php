@@ -48,6 +48,10 @@
                 font-size: 84px;
             }
 
+            .sub-title{
+                font-size: 36px;
+            }
+
             .links > a {
                 color: #636b6f;
                 padding: 0 25px;
@@ -56,6 +60,10 @@
                 letter-spacing: .1rem;
                 text-decoration: none;
                 text-transform: uppercase;
+            }
+
+            .m-b-sm{
+                margin-bottom: 15px;
             }
 
             .m-b-md {
@@ -81,9 +89,13 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Laravel 7
                 </div>
-
+                <div class="sub-title m-b-sm">
+                    {{$array['name']}}
+                </div>
+                <p>The current UNIX timestamp is {{ time() }}.</p>
+                <p>Not prevent XSS attacks: Hello, {!! $array['name'] !!}</p>
                 <div class="links">
                     <a href="https://laravel.com/docs">Docs</a>
                     <a href="https://laracasts.com">Laracasts</a>
@@ -96,5 +108,9 @@
                 </div>
             </div>
         </div>
+        <script type="text/javascript">
+            var arr = @json($array);
+            console.log(arr);
+        </script>
     </body>
 </html>
