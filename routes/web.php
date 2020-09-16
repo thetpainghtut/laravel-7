@@ -17,9 +17,12 @@ use Illuminate\Support\Facades\Route;
 //   return view('frontend.main');
 // })->name('main');
 
-Route::get('greeting', function () {
+Route::get('/', function () {
   $info = ['name'=>'Thet Paing Htut'];
   return view('welcome',['array' => $info]);
 });
 
 
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

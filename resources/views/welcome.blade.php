@@ -88,6 +88,7 @@
             @endif
 
             <div class="content">
+                <x-panel description="This is panel with component!"></x-panel>
                 <div class="title m-b-md">
                     Laravel 7
                 </div>

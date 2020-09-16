@@ -6,14 +6,15 @@ use Illuminate\View\Component;
 
 class Panel extends Component
 {
+    public $description;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($description)
     {
-        //
+        $this->description = $description;
     }
 
     /**
