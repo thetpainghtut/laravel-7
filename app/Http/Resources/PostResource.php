@@ -23,6 +23,7 @@ class PostResource extends JsonResource
             'post_id' => $this->id,
             'post_title' => $this->title,
             'post_tags' => TagResource::collection($this->tags),
+            'post_content' => $this->content,
             'created_at' => $this->created_at->format('Y-m-d H:i:s'),
             'updated_at' => $this->updated_at->format('Y-m-d H:i:s'),
         ];
