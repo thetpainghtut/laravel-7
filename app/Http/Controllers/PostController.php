@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Post;
 use Illuminate\Http\Request;
 use App\Http\Resources\PostResource;
+use App\Tag;
 
 class PostController extends Controller
 {
@@ -18,7 +19,8 @@ class PostController extends Controller
         $posts = Post::all();
         
         if ($request->tag_id != null) {
-            $posts = Post::where('tag_id',$request->tag_id)->get();
+            $tag = Tag::findOrFail($request->tag_id);
+            $posts = $tag->posts;
         }
 
         return response()->json([
