@@ -13,10 +13,14 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $posts = Post::all();
         
+        if ($request->tag_id != null) {
+            $posts = Post::where('tag_id',$request->tag_id)->get();
+        }
+
         return response()->json([
             'status' => 'ok',
             'totalResults' => count($posts),
