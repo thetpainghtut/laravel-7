@@ -4,30 +4,34 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use Illuminate\Http\Request;
-use App\Http\Resources\PostResource;
 use App\Tag;
 
-class PostController extends Controller
+class WebPostController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
         $posts = Post::orderBy('id','desc')->get();
-        
-        if ($request->tag_id != null) {
-            $tag = Tag::findOrFail($request->tag_id);
-            $posts = $tag->posts;
-        }
+        return view('backend.posts.index',compact('posts'));
+    }
 
-        return response()->json([
-            'status' => 'ok',
-            'totalResults' => count($posts),
-            'posts' => PostResource::collection($posts)
-        ]);
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $tags = Tag::all();
+        return view('backend.posts.create',compact('tags'));
     }
 
     /**
@@ -38,7 +42,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request);
+        // dd($request);
 
         //validation
         $request->validate([
@@ -60,10 +64,7 @@ class PostController extends Controller
             // $post->tags()->attach($row['id']);
         }
 
-        // response
-        return (new PostResource($post))
-                    ->response()
-                    ->setStatusCode(201);
+        return redirect()->route('posts.index');
     }
 
     /**
@@ -74,7 +75,18 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        return new PostResource($post);
+        return view('backend.posts.show',compact('post'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Post  $post
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Post $post)
+    {
+        //
     }
 
     /**
